@@ -1,130 +1,210 @@
-let navbar = document.querySelector('.navbar')
+document.addEventListener("DOMContentLoaded", function () {
+    const btnNextRev = document.querySelector('.pagination');
+    const jarakMargin = document.querySelector('.jarak');
+    let sudahDiaktifkan = false; // Variabel penanda untuk melacak pengaktifan
 
-document.querySelector('#menu-bar').onclick = () =>{
-    navbar.classList.toggle('active');
-}
+    document.querySelector('#search-button').addEventListener('click', function () {
+        var movieList = document.querySelector('#movie-list');
+        movieList.innerHTML = ''; // Membersihkan daftar film sebelum menampilkan hasil pencarian baru
 
-document.querySelector('#close').onclick = () =>{
-    navbar.classList.remove('active');
-}
+        var searchInput = document.querySelector('#search-input').value;
+        var apiUrl = 'http://omdbapi.com?apikey=1aa76861&s=' + searchInput;
+        currentPage = 1; // Set currentPage ke 1 pada pencarian baru
+        fetch(apiUrl)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (result) {
+                if (result.Response == "True") {
+                    if (!sudahDiaktifkan) { // Periksa jika belum diaktifkan
+                        jarakMargin.classList.toggle('display-none');
+                        btnNextRev.classList.toggle('display-none');
+                        sudahDiaktifkan = true; // Perbarui variabel penanda
+                    }
+                    var movies = result.Search;
+                    cardsPerPage = 5;
+                    movies.forEach(function (data) {
+                        var movieElement = document.createElement('div');
+                        movieElement.classList.add('box-penjualan');
+                        movieElement.innerHTML = `
+                            <div class="image">
+                                <img src="${data.Poster}" alt="">
+                                <div class="icons">
+                                    <a href="#" class="fas fa-heart"></a>
+                                    <a href="#" class="cart-btn">read more</a>
+                                    <a href="#" class="fas fa-share"></a>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <h3>${data.Title}</h3>
+                                <div class="price">${data.Year}</div>
+                            </div>
+                        `;
+                        movieList.appendChild(movieElement);
+                    });
 
-window.onscroll = () =>{
+                    cards = document.querySelectorAll('.box-penjualan'); // Perbarui variabel cards
+                    totalCards = cards.length;
+                    totalPages = Math.ceil(totalCards / cardsPerPage);
+                    showPage(currentPage);
+                    updatePagination();
+                } else {
+                    movieList.innerHTML = `<h1>${result.Error}</h1>`;
+                    totalPages = 1;
+                    showPage(currentPage);
+                    updatePagination();
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    });
 
-    navbar.classList.remove('active');
 
-    if(window.scrollY > 100){
-        document.querySelector('header').classList.add('active');
-    }else{
-        document.querySelector('header').classList.remove('active');
+
+    var currentPage = 1;
+    var cardsPerPage = 2;
+    var cards = document.querySelectorAll('.box-penjualan');
+    var totalCards = cards.length;
+    var totalPages = Math.ceil(totalCards / cardsPerPage);
+
+    function showPage(page) {
+        var start = (page - 1) * cardsPerPage;
+        var end = start + cardsPerPage;
+
+        for (var i = 0; i < cards.length; i++) {
+            if (i >= start && i < end) {
+                cards[i].style.display = 'block';
+            } else {
+                cards[i].style.display = 'none';
+            }
+        }
     }
 
-}
+    function updatePagination() {
+        var prevLink = document.querySelector('.prev');
+        var nextLink = document.querySelector('.next');
+        var pages = document.querySelector('.pages');
 
-let themeToggler = document.querySelector('#theme-toggler');
+        if (currentPage === 1) {
+            prevLink.style.display = 'none';
+        } else {
+            prevLink.style.display = 'inline-block';
+        }
 
-themeToggler.onclick = () =>{
-    themeToggler.classList.toggle('fa-sun');
-    if(themeToggler.classList.contains('fa-sun')){
-        document.querySelector('body').classList.add('active');
-    }else{
-        document.querySelector('body').classList.remove('active');
+        if (currentPage === totalPages) {
+            nextLink.style.display = 'none';
+        } else {
+            nextLink.style.display = 'inline-block';
+        }
+
+        if (totalPages <= 1) {
+            pages.style.display = 'none';
+        } else {
+            pages.style.display = 'block';
+
+            var startPage = 1;
+            var endPage = totalPages;
+
+            if (totalPages > 3) {
+                if (currentPage <= 2) {
+                    endPage = 3;
+                } else if (currentPage >= totalPages - 1) {
+                    startPage = totalPages - 2;
+                } else {
+                    startPage = currentPage - 1;
+                    endPage = currentPage + 1;
+                }
+            }
+
+            var pageLinks = '';
+
+            for (var i = startPage; i <= endPage; i++) {
+                if (i === currentPage) {
+                    pageLinks += '<a class="active" disabled>' + i + '</a>';
+                } else {
+                    pageLinks += '<a class="page-link" data-page="' + i + '">' + i + '</a>';
+                }
+            }
+
+            pages.innerHTML = pageLinks;
+
+            var pageLinks = document.querySelectorAll('.page-link');
+            pageLinks.forEach(function (link) {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    var page = parseInt(this.dataset.page);
+                    if (!this.classList.contains('active')) {
+                        navigateToPage(page);
+                    }
+                });
+            });
+        }
     }
-}
 
-document.querySelectorAll('.small-image-1').forEach(images =>{
-    images.onclick = () =>{
-        document.querySelector('.big-image-1').src = images.getAttribute('src');
+    function navigateToPage(page) {
+        currentPage = page;
+        showPage(currentPage);
+        updatePagination();
     }
-});
 
-document.querySelectorAll('.small-image-2').forEach(images =>{
-    images.onclick = () =>{
-        document.querySelector('.big-image-2').src = images.getAttribute('src');
+    function navigateToPrev() {
+        if (currentPage > 1) {
+            currentPage--;
+            showPage(currentPage);
+            updatePagination();
+        }
     }
-});
 
-document.querySelectorAll('.small-image-3').forEach(images =>{
-    images.onclick = () =>{
-        document.querySelector('.big-image-3').src = images.getAttribute('src');
+    function navigateToNext() {
+        if (currentPage < totalPages) {
+            currentPage++;
+            showPage(currentPage);
+            updatePagination();
+        }
     }
-});
 
-let countDate = new Date('aug 1, 2021 00:00:00').getTime();
+    showPage(currentPage);
+    updatePagination();
 
-function countDown(){
+    var prevLink = document.querySelector('.prev');
+    var nextLink = document.querySelector('.next');
+    prevLink.addEventListener('click', navigateToPrev);
+    nextLink.addEventListener('click', navigateToNext);
 
-    let now = new Date().getTime();
-	gap = countDate - now;
+    var pageLinks = document.querySelectorAll('.pages a');
+    pageLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+            var page = parseInt(this.innerHTML);
+            navigateToPage(page);
+        });
+    });
 
-    let seconds = 1000;
-    let minutes = seconds * 60;
-    let hours = minutes * 60;
-    let days = hours * 24;
 
-    let d = Math.floor(gap / (days));
-	let h = Math.floor((gap % (days)) / (hours));
-	let m = Math.floor((gap % (hours)) / (minutes));
-	let s = Math.floor((gap % (minutes)) / (seconds));
 
-    document.getElementById('days').innerText = d;
-    document.getElementById('hours').innerText = h;
-    document.getElementById('minutes').innerText = m;
-    document.getElementById('seconds').innerText = s;
 
-}
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
 
-setInterval(function(){
-    countDown()
-},1000);
+    // Mendengarkan tombol Enter pada input teks
+    searchInput.addEventListener('keyup', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Mencegah form dikirim secara default
+            searchButton.click(); // Memicu klik pada tombol Cari
+        }
+    });
 
-var swiper = new Swiper(".product-slider", {
-    slidesPerView: 3,
-    loop:true,
-    spaceBetween: 10,
-    autoplay: {
-        delay: 4000,
-        disableOnInteraction: false,
-    },
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-    },
-    breakpoints: {
-        0: {
-            slidesPerView: 1,
-        },
-        550: {
-          slidesPerView: 2,
-        },
-        800: {
-          slidesPerView: 3,
-        },
-        1000: {
-            slidesPerView: 3,
-        },
-    },
-});
+    // Mendengarkan klik pada tombol Cari
+    searchButton.addEventListener('click', function () {
+        performSearch();
+    });
 
-var swiper = new Swiper(".review-slider", {
-    slidesPerView: 3,
-    loop:true,
-    spaceBetween: 10,
-    autoplay: {
-        delay: 4000,
-        disableOnInteraction: false,
-    },
-    breakpoints: {
-        0: {
-            slidesPerView: 1,
-        },
-        550: {
-          slidesPerView: 2,
-        },
-        800: {
-          slidesPerView: 3,
-        },
-        1000: {
-            slidesPerView: 3,
-        },
-    },
+    // Fungsi untuk melakukan pencarian
+    function performSearch() {
+        const searchText = searchInput.value;
+        // Lakukan aksi pencarian sesuai kebutuhan Anda
+        console.log('Melakukan pencarian:', searchText);
+    }
+
+
 });
