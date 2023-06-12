@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         movieList.innerHTML = ''; // Membersihkan daftar film sebelum menampilkan hasil pencarian baru
 
         var searchInput = document.querySelector('#search-input').value;
-        var apiUrl = 'http://omdbapi.com?apikey=1aa76861&s=' + searchInput;
+        var apiUrl = 'https://omdbapi.com?apikey=1aa76861&s=' + searchInput;
         currentPage = 1; // Set currentPage ke 1 pada pencarian baru
         fetch(apiUrl)
             .then(function (response) {
