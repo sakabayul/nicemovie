@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const jarakMargin = document.querySelector('.jarak');
     let sudahDiaktifkan = false; // Variabel penanda untuk melacak pengaktifan
 
+    // Menambahkan event listener pada tombol "Cari"
     document.querySelector('#search-button').addEventListener('click', function () {
         var movieList = document.querySelector('#movie-list');
         movieList.innerHTML = ''; // Membersihkan daftar film sebelum menampilkan hasil pencarian baru
@@ -10,6 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
         var searchInput = document.querySelector('#search-input').value;
         var apiUrl = 'https://omdbapi.com?apikey=1aa76861&s=' + searchInput;
         currentPage = 1; // Set currentPage ke 1 pada pencarian baru
+
+        // Melakukan request fetch ke API
         fetch(apiUrl)
             .then(function (response) {
                 return response.json();
@@ -21,29 +24,32 @@ document.addEventListener("DOMContentLoaded", function () {
                         btnNextRev.classList.toggle('display-none');
                         sudahDiaktifkan = true; // Perbarui variabel penanda
                     }
+
                     var movies = result.Search;
                     cardsPerPage = 5;
+
+                    // Membuat elemen film dan menambahkannya ke daftar film
                     movies.forEach(function (data) {
                         var movieElement = document.createElement('div');
-                        movieElement.classList.add('box-penjualan');
+                        movieElement.classList.add('box-movie');
                         movieElement.innerHTML = `
-                            <div class="image">
-                                <img src="${data.Poster}" alt="">
-                                <div class="icons">
-                                    <a href="#" class="fas fa-heart"></a>
-                                    <a href="#" class="cart-btn">read more</a>
-                                    <a href="#" class="fas fa-share"></a>
-                                </div>
+                        <div class="image">
+                            <img src="${data.Poster}" alt="">
+                            <div class="icons">
+                                <a href="#" class="fas fa-heart"></a>
+                                <a href="#" class="cart-btn">read more</a>
+                                <a href="#" class="fas fa-share"></a>
                             </div>
-                            <div class="content">
-                                <h3>${data.Title}</h3>
-                                <div class="price">${data.Year}</div>
-                            </div>
+                        </div>
+                        <div class="content">
+                            <h3>${data.Title}</h3>
+                            <div class="deskripsi">${data.Year}</div>
+                        </div>
                         `;
                         movieList.appendChild(movieElement);
                     });
 
-                    cards = document.querySelectorAll('.box-penjualan'); // Perbarui variabel cards
+                    cards = document.querySelectorAll('.box-movie'); // Perbarui variabel cards
                     totalCards = cards.length;
                     totalPages = Math.ceil(totalCards / cardsPerPage);
                     showPage(currentPage);
@@ -60,14 +66,13 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     });
 
-
-
     var currentPage = 1;
     var cardsPerPage = 2;
-    var cards = document.querySelectorAll('.box-penjualan');
+    var cards = document.querySelectorAll('.box-movie');
     var totalCards = cards.length;
     var totalPages = Math.ceil(totalCards / cardsPerPage);
 
+    // Fungsi untuk menampilkan halaman film yang sesuai
     function showPage(page) {
         var start = (page - 1) * cardsPerPage;
         var end = start + cardsPerPage;
@@ -81,6 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // Fungsi untuk memperbarui tampilan pagination
     function updatePagination() {
         var prevLink = document.querySelector('.prev');
         var nextLink = document.querySelector('.next');
@@ -142,12 +148,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // Fungsi untuk berpindah ke halaman tertentu
     function navigateToPage(page) {
         currentPage = page;
         showPage(currentPage);
         updatePagination();
     }
 
+    // Fungsi untuk berpindah ke halaman sebelumnya
     function navigateToPrev() {
         if (currentPage > 1) {
             currentPage--;
@@ -156,6 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // Fungsi untuk berpindah ke halaman berikutnya
     function navigateToNext() {
         if (currentPage < totalPages) {
             currentPage++;
@@ -180,9 +189,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-
-
-
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
 
@@ -202,9 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Fungsi untuk melakukan pencarian
     function performSearch() {
         const searchText = searchInput.value;
-        // Lakukan aksi pencarian sesuai kebutuhan Anda
+        // Lakukan aksi pencarian sesuai kebutuhan
         console.log('Melakukan pencarian:', searchText);
     }
-
-
 });

@@ -1,10 +1,10 @@
+/* Pengaturan Start */
 :root{
     --warna1:#ffffff;
     --warna2:#ff9d00;
     --warna3:rgba(0, 0, 0, 0.6);
     --warna4:rgb(111, 111, 111);
 }
-
 *{
     margin:0; padding:0;
     box-sizing: border-box;
@@ -14,7 +14,6 @@
     text-transform: capitalize;
     transition: .2s linear;
 }
-
 html{
     font-size: 100%;
     scroll-behavior: smooth;
@@ -22,40 +21,11 @@ html{
     overflow-x: hidden;
     background: var(--warna4);
 }
+/* Pengaturan End */
 
-section{
-    padding:2rem 9%;
-}
 
-.heading{
-    text-align: center;
-    font-size: 2rem;
-    color: var(--warna2);
-    padding:1rem;
-    margin:2rem 0;
-    background:var(--warna3);
-}
 
-.heading span{
-    color:var(--warna1);
-}
-
-.btn{
-    display: inline-block;
-    margin-top: 1rem;
-    border-radius: .5rem;
-    background: var(--warna2);
-    color:#fff;
-    padding:.9rem 3.5rem;
-    cursor: pointer;
-    font-size: 1rem;
-}
-
-.btn:hover{
-    background:var(--warna1);
-    color: var(--warna3);
-}
-
+/* Section Header Navigation bar Start */
 header{
     position: fixed;
     top:0; left:0; right:0;
@@ -67,13 +37,11 @@ header{
     z-index: 1000;
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
 }
-
 header .logo{
     font-size: 2rem;
     color: var(--warna2);
     font-weight: bolder;
 }
-
 header .logo span{
     color:var(--warna1);
 }
@@ -85,25 +53,20 @@ header .navbar a{
     padding:0 1.5rem;
     color:var(--warna1);
 }
-
 header .navbar a:hover{
     color:var(--warna2);
 }
-
 header .icons a{
     font-size: 1.5rem;
     color: var(--warna2);
     margin-left: 1.5rem;
 }
-
 header .icons a:hover{
     color:var(--warna1);
 }
-
 header #toggler{
     display: none;
 }
-
 header .fa-bars{
     font-size: 2rem;
     color: var(--warna2);
@@ -112,11 +75,31 @@ header .fa-bars{
     cursor: pointer;
     display: none;
 }
+/* Section Header Navigation bar End */
 
 
 
-/* Produck yang dijual start */
-.products h1.search{
+/* Pengaturan Section Start */
+section{
+    padding:2rem 9%;
+}
+.heading{
+    text-align: center;
+    font-size: 2rem;
+    color: var(--warna2);
+    padding:1rem;
+    margin:2rem 0;
+    background:var(--warna3);
+}
+.heading span{
+    color:var(--warna1);
+}
+/* Pengaturan Section End */
+
+
+
+/* Section Search Start */
+.movie h1.search{
     display: flex;
     justify-content: center;
     margin-bottom: 2rem;
@@ -131,7 +114,7 @@ header .fa-bars{
     margin-bottom: 2rem;
 }
 #search-input {
-    padding: .6rem;
+    padding: .55rem;
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-right: 10px;
@@ -152,12 +135,17 @@ header .fa-bars{
 #search-button:hover {
     background-color: var(--warna3);
 }
-.products .box-container{
+/* Section Search End */
+
+
+
+/* Section Movie Start */
+.movie .box-container{
     display: flex;
     flex-wrap: wrap;
     gap:1.5rem;
 }
-.products .box-container .box-penjualan {
+.movie .box-container .box-movie {
     flex:1 1 30rem;
     box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.1);
     border-radius: .5rem;
@@ -165,28 +153,28 @@ header .fa-bars{
     position: relative;
     background: var(--warna3);
 }
-.products .box-container .box-penjualan .image{
+.movie .box-container .box-movie .image{
     position: relative;
     text-align: center;
     padding-top: 2rem;
     overflow:hidden;
 }
-.products .box-container .box-penjualan .image img{
+.movie .box-container .box-movie .image img{
     width: auto;
     height: 50%;
 }
-.products .box-container .box-penjualan:hover .image img{
+.movie .box-container .box-movie:hover .image img{
     transform: scale(1.1);
 }
-.products .box-container .box-penjualan .image .icons{
+.movie .box-container .box-movie .image .icons{
     position: absolute;
     bottom:-7rem; left:0; right:0;
     display: flex;
 }
-.products .box-container .box-penjualan:hover .image .icons{
+.movie .box-container .box-movie:hover .image .icons{
     bottom:0;
 }
-.products .box-container .box-penjualan .image .icons a{
+.movie .box-container .box-movie .image .icons a{
     height: 3rem;
     line-height: 3rem;
     font-size: 1.3rem;
@@ -194,40 +182,40 @@ header .fa-bars{
     background:var(--warna1);
     color:var(--warna3);
 }
-.products .box-container .box-penjualan .image .icons .cart-btn{
+.movie .box-container .box-movie .image .icons .cart-btn{
     border-left: .1rem solid #fff7;
     border-right: .1rem solid #fff7;
     width:100%;
 }
-.products .box-container .box-penjualan .image .icons a:hover{
+.movie .box-container .box-movie .image .icons a:hover{
     background: var(--warna2);
 }
-.products .box-container .box-penjualan .content{
+.movie .box-container .box-movie .content{
     padding:2rem;
     text-align: center;
 }
-.products .box-container .box-penjualan .content h3{
+.movie .box-container .box-movie .content h3{
     font-size: 1.8rem;
     color: var(--warna2);
 }
-.products .box-container .box-penjualan .content .price{
+.movie .box-container .box-movie .content .deskripsi{
     font-size: 1.5rem;
     color:var(--warna1);
     font-weight: bolder;
     padding-top: 1rem;
 }
-.products .pagination {
+.movie .pagination {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
 }
-.products .display-none{
+.movie .display-none{
     display: none;
 }
 .jarak {
     width: 100%;
-    margin: 10rem 0;
+    margin: 12rem 0;
     padding: 1rem;
     font-size: 1.5rem;
     text-align: center;
@@ -236,7 +224,7 @@ header .fa-bars{
 .jarak p{
     text-transform: none;
 }
-.products .pagination a {
+.movie .pagination a {
     display: inline-block;
     padding: 5px 10px;
     font-size: 1rem;
@@ -247,18 +235,18 @@ header .fa-bars{
     margin-right: 5px;
     cursor: pointer;
 }
-.products .pagination a.active {
+.movie .pagination a.active {
     background-color: var(--warna2);
     color: var(--warna1);
 }
-.products .pagination .pages{
+.movie .pagination .pages{
     display: inline-block;
 }
-/* end */
+/* Section Movie Start */
 
 
 
-/* start contact */
+/* Section Contact Start */
 .contact .row{
     display: flex;
     flex-wrap: wrap-reverse;
@@ -303,11 +291,25 @@ header .fa-bars{
     height: 8rem;
     resize: none;
 }
-/* End contact */
+.btn{
+    display: inline-block;
+    margin-top: 1rem;
+    border-radius: .5rem;
+    background: var(--warna2);
+    color:#fff;
+    padding:.8rem 1.3rem;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+.btn:hover{
+    background:var(--warna1);
+    color: var(--warna3);
+}
+/* Section Contact End */
 
 
 
-/* Start Footer */
+/* Section Footer Start */
 .footer{
     background: var(--warna3);
 }
@@ -321,16 +323,17 @@ header .fa-bars{
 .footer .credit a{
     color:var(--warna2);
 }
+/* Section Footer End */
 
 
 
-/* media queries  */
-@media (max-width:1024px){
+/* Section Responsive Start */
+@media (max-width:1080px){
     html{
         font-size: 80%;
     }
 }
-@media (max-width:768px){
+@media (max-width:720px){
     header .fa-bars{
         display: block;
     }
@@ -351,17 +354,18 @@ header .fa-bars{
         border:.1rem solid rgba(0,0,0,.1);
         display: block;
     }
-    .products h1.search{
-        margin-top: 6rem;
+    .movie h1.search{
+        margin-top: 4rem;
     }
-    .products .box-container .box-penjualan .image img{
+    .movie .box-container .box-movie .image img{
         width: auto;
         height:50%;
     }
     
 }
-@media (max-width:450px){
+@media (max-width:540px){
     html{
         font-size: 60%;
     }
 }
+/* Section Responsive End */
