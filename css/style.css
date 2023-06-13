@@ -1,6 +1,6 @@
 :root{
     --warna1:#ffffff;
-    --warna2:#ff0000;
+    --warna2:#ff9d00;
     --warna3:rgba(0, 0, 0, 0.6);
     --warna4:rgb(111, 111, 111);
 }
@@ -60,7 +60,7 @@ header{
     position: fixed;
     top:0; left:0; right:0;
     background:var(--warna3);
-    padding:1rem 9%;
+    padding: 1rem 9%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -77,7 +77,9 @@ header .logo{
 header .logo span{
     color:var(--warna1);
 }
-
+header .navbar{
+    margin-right: 6.5rem;
+}
 header .navbar a{
     font-size: 1.2rem;
     padding:0 1.5rem;
@@ -108,21 +110,19 @@ header .fa-bars{
     border-radius: .5rem;
     padding:.5rem 1.5rem;
     cursor: pointer;
-    border:.1rem solid rgba(0,0,0,.3);
     display: none;
 }
 
 
 
 /* Produck yang dijual start */
-/* CSS */
 .products h1.search{
     display: flex;
     justify-content: center;
     margin-bottom: 2rem;
     margin-top: 4rem;
     font-size: 2rem;
-    color: var(--warna1);
+    color: var(--warna3);
 }
 .search-container {
     display: flex;
@@ -137,8 +137,8 @@ header .fa-bars{
     margin-right: 10px;
     font-size: 1.2rem;
     width: 60rem;
-    background-color: var(--warna4);
-    color: var(--warna1);
+    background-color: #aeaeae;
+    color: var(--warna3);
 }
 #search-button {
     padding: .8rem 1.5rem;
@@ -152,9 +152,6 @@ header .fa-bars{
 #search-button:hover {
     background-color: var(--warna3);
 }
-#search-button:active {
-    background-color: #3d8b40;
-}  
 .products .box-container{
     display: flex;
     flex-wrap: wrap;
@@ -175,7 +172,8 @@ header .fa-bars{
     overflow:hidden;
 }
 .products .box-container .box-penjualan .image img{
-    height:20rem;
+    width: auto;
+    height: 50%;
 }
 .products .box-container .box-penjualan:hover .image img{
     transform: scale(1.1);
@@ -228,9 +226,12 @@ header .fa-bars{
     display: none;
 }
 .jarak {
-    font-size: 2rem;
+    width: 100%;
+    margin: 10rem 0;
+    padding: 1rem;
+    font-size: 1.5rem;
     text-align: center;
-    margin: 15rem;
+    color: var(--warna3);
 }
 .jarak p{
     text-transform: none;
@@ -290,10 +291,10 @@ header .fa-bars{
     width: 100%;
     margin: .8rem;
     color: var(--warna1);
-    background:var(--warna4);
+    background-color: #aeaeae;
 }
 ::placeholder {
-    color: var(--warna1); /* Ganti dengan warna yang diinginkan */
+    color: var(--warna3); /* Ganti dengan warna yang diinginkan */
 }
 .contact .row form .box:focus{
     border-color: var(--warna1);
@@ -324,32 +325,15 @@ header .fa-bars{
 
 
 /* media queries  */
-@media (max-width:991px){
-    
+@media (max-width:1024px){
     html{
-        font-size: 55%;
+        font-size: 80%;
     }
-
-    header{
-        padding:2rem;
-    }
-
-    section{
-        padding:2rem;
-    }
-
-    .home{
-        background-position: left;
-    }
-
 }
-
 @media (max-width:768px){
-
     header .fa-bars{
         display: block;
     }
-
     header .navbar{
         position:absolute;
         top:100%; left:0; right:0;
@@ -357,11 +341,9 @@ header .fa-bars{
         border-top: .1rem solid rgba(0,0,0,.1);
         clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     }
-
     header #toggler:checked ~ .navbar{
         clip-path:polygon(0 0, 100% 0, 100% 100%, 0% 100%);
     }
-
     header .navbar a{
         margin:1.5rem;
         padding:1.5rem;
@@ -369,33 +351,17 @@ header .fa-bars{
         border:.1rem solid rgba(0,0,0,.1);
         display: block;
     }
-
-    .home .content h3{
-        font-size: 5rem;
+    .products h1.search{
+        margin-top: 6rem;
     }
-
-    .home .content span{
-        font-size: 2.5rem;
-    }
-
-    .icons-container .icons h3{
-        font-size: 2rem;
-    }
-    
-    .icons-container .icons span{
-        font-size: 1.7rem;
+    .products .box-container .box-penjualan .image img{
+        width: auto;
+        height:50%;
     }
     
 }
-
 @media (max-width:450px){
-    
     html{
-        font-size: 50%;
+        font-size: 60%;
     }
-
-    .heading{
-        font-size: 3rem;
-    }
-
 }

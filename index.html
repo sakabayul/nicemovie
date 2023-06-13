@@ -54,8 +54,7 @@
             <h1>try search movie</h1>
             <p>(Jika ada Error coba kirim pesan ke contact dibawah ini).</p>
             <br>
-            <p>(Informasi film ini diambil dari OMDb Rest API</p>
-            <p>dan hanya dipergunakan untuk konten edukasi saja!)</p>
+            <p>(Informasi film ini diambil dari Rest API OMDb dan hanya dipergunakan untuk latihan saya saja!)</p>
         </div>
     </section>
     <!-- prodcuts section ends -->
@@ -66,7 +65,7 @@
     <section class="contact" id="contact">
         <h1 class="heading"> <span> contact </span> us </h1>
         <div class="row">
-            <form action="" name="my-contact-portfolio">
+            <form action="" name="my-contact-nicemovie">
                 <input type="text" name="website" value="Website Informasi Film" class="box display-none" readonly>
                 <input type="text" name="nama" placeholder="name" class="box" required>
                 <input type="email" name="email" placeholder="email" class="box" required>
@@ -98,7 +97,7 @@
     <!-- Script tombol kirim form untuk my contact -->
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwoKpeRYLbIVkUS8c5RXFjXoyCZxM5sLc9BrLm1L4rteTEsKhJWGzXTJSHNtqhyOWlQ1A/exec'
-        const form = document.forms['my-contact-portfolio'];
+        const form = document.forms['my-contact-nicemovie'];
 
         form.addEventListener('submit', e => {
             e.preventDefault()
